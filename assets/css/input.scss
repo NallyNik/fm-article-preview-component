@@ -1,11 +1,13 @@
 @use 'global';
 
 .main {
+    position: relative;
     width: 20rem;
     overflow: hidden;
 
     background-color: white;
     border-radius: 1rem;
+    box-shadow: 0 10px 30px -15px global.$very-dark-grayish-blue;
 }
 .main-img {
     width: 100%;
@@ -16,16 +18,17 @@
     @extend %flex-column;
     margin: 2rem 2rem 1rem;
     gap: 1rem;
-}
-h1 {
-    font-size: 1rem;
-}
-p {
-    font-size: .9rem;
+    
+    h1 {
+        font-size: 1rem;
+    }
+    p {
+        font-size: .9rem;
+    }
 }
 .main__footer {
-    position: relative;
     width: 100%;
+    margin-top: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,24 +43,48 @@ p {
     }
 }
 .avatar {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.4rem;
+    height: 2.4rem;
 
     border-radius: 50%;
 }
 .share {
     position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.4rem 2rem;
+    @extend .person;
     opacity: 0;
+    
+    background-color: global.$very-dark-grayish-blue;
+
+    h2 {
+        color: white;
+        text-transform: uppercase;
+        font-weight: lighter;
+        font-size: .8rem;
+        letter-spacing: 5px;
+    }
 }
 .share-visible {
     opacity: 1;
 }
+.social-media {
+    @extend .person;
+}
 .button {
     width: 2rem;
     height: 2rem;
+    z-index: 1;
 
     border-radius: 50%;
-    background: center url('../images/icon-share.svg') no-repeat, global.$light-grayish-blue;
+    color: global.$very-dark-grayish-blue;
+    background: global.$light-grayish-blue;
+}
+.button-change {
+    color: white;
+    background-color: global.$desaturated-dark-blue;
 }
 
 .footer {
@@ -68,4 +95,54 @@ a:hover {
     color: #275e4d;
     text-decoration: none;
     text-shadow: 0 0 15px #275e4d;
+}
+
+@media (min-width: 1200px) {
+    .main {
+        width: 55%;
+        display: grid;
+        grid-template: "img content" / 2fr 3fr;
+        overflow: visible;
+    }
+    .main-img {
+        grid-area: img;
+        object-position: left;
+
+        border-radius: 1rem 0 0 1rem;
+    }
+    .content {
+        margin: 2rem;
+
+        h1 {
+            font-size: 1.4rem;
+        }
+    }
+    .share {
+        width: fit-content;
+        padding: 1rem 2rem;
+        bottom: 30%;
+        left: 78%;
+
+        border-radius: .8rem;
+        box-shadow: 0 10px 20px -15px global.$very-dark-grayish-blue;
+
+        &::after {
+            content: "";
+            width: 0;
+            height: 0;
+            position: absolute;
+            bottom: -15px;
+            right: 40%;
+
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid global.$very-dark-grayish-blue;
+        }
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        font-size: 1rem;
+    }
 }
